@@ -116,6 +116,8 @@ module Elastictastic
                :script_fields, :preference, :facets, :routing,
                :to => :current_scope
 
+      attr_writer :index_name
+
       def mapping
         mapping_for_type = { 'properties' => properties }
         mapping_for_type['_boost'] = @_boost if @_boost
@@ -140,10 +142,16 @@ module Elastictastic
         current_scope.scoped(params)
       end
 
+      def index_name(name=nil)
+        @index_name = [Rails.env, name].compact.join('_') if name
+        @index_name || [Rails.env, klass.model_name.plural].compact.join('_')
+      end
+
       private
 
       def default_scope
-        in_index(Index.default)
+        new_index_name = @index_name || index_name
+        in_index(new_index_name)
       end
     end
 

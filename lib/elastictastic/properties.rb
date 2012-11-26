@@ -44,6 +44,7 @@ module Elastictastic
       def properties
         return @_properties if defined? @_properties
         @_properties = {}
+        @_properties.merge!(superclass.field_properties) unless superclass == Object
         @_properties.merge!(field_properties)
         embeds.each_pair do |name, embed|
           @_properties[name] = { 'properties' => embed.clazz.properties }

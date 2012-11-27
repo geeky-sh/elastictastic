@@ -143,8 +143,14 @@ module Elastictastic
       end
 
       def index_name(name=nil)
-        @index_name = [Rails.env, name].compact.join('_') if name
-        @index_name || [Rails.env, klass.model_name.plural].compact.join('_')
+        if name
+          if name.include?(Rails.env)
+            @index_name = name
+          else
+            @index_name = [Rails.env, name].compact.join('_')
+          end
+        end
+        @index_name || [Rails.env, model_name.plural].compact.join('_')
       end
 
       private

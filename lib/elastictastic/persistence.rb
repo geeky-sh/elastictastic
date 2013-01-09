@@ -55,6 +55,11 @@ module Elastictastic
       Elastictastic.persister.update(self, &block)
     end
 
+    module ClassMethods
+      def aash
+        type
+      end
+    end
     private
 
     def assert_transient!

@@ -4,10 +4,6 @@ module Elastictastic
       persisted? ? update(options, &block) : create(options, &block)
     end
 
-    def create_or_update(options = {}, &block)
-      update(options, &block)
-    end
-    
     def destroy(options = {}, &block)
       if persisted?
         Elastictastic.persister.destroy(self, &block)

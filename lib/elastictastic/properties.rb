@@ -49,6 +49,7 @@ module Elastictastic
         embeds.each_pair do |name, embed|
           @_properties[name] = { 'properties' => embed.clazz.properties }
           @_properties[name]['type'] = embed.type unless embed.type.nil?
+          @_properties[name]['include_in_root'] = embed.include_in_root unless embed.include_in_root.nil?
         end
         @_properties
       end

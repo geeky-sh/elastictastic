@@ -28,5 +28,10 @@ module Elastictastic
     def type
       @options[:type]
     end
+
+    ## used only for embedded documents
+    def include_in_root
+      @options[:include_in_root]
+    end
   end
 end

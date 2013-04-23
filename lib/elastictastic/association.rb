@@ -30,7 +30,7 @@ module Elastictastic
     end
 
     ## used only for embedded documents
-    def include_in_root
+    def include_in_parent
       @options[:include_in_parent]
     end
   end
